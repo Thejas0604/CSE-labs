@@ -2,6 +2,7 @@
 #include <vector>
 using namespace std;
 #include <unordered_map>
+#include <climits>
 
 int partition(vector<int>arr, int start, int end)
 {
@@ -52,7 +53,7 @@ void quickSort(vector<int>arr, int start, int end)
 
 vector<int> closestNumbers(vector<int>arr){
 	
-	int min_diff = NULL;
+	int min_diff = INT_MAX;
 	quickSort(arr,arr[0],arr[arr.size()-1]);
 	unordered_map<int,vector<int>> result;
 	for (int i =0;i<arr.size();i++){
