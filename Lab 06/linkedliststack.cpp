@@ -1,49 +1,50 @@
 #include <iostream>
 #include <chrono>
 using namespace std::chrono;
-#define MAX 15
+using namespace std;
 
-using namespace std ;
+struct Node {
+   int data;
+   struct Node *next;
+};
 
-int arr[MAX];
-int top = -1;
+struct Node* top = NULL;
 
 bool isEmpty(){
-    if(top==-1){
+    if(top==NULL){
         return true;
     }else{
         return false;
     }
 }
-void push(int x){
-    top = top +1;
-    if(top>=MAX){
-        throw invalid_argument("Stack Overflow");
-    }else{
-        arr[top] = x;
-    }
-    
-} 
 
-int pop(){
-    if (isEmpty()){
-        throw invalid_argument("Stack Underflow");
-    }else{
-        top = top - 1 ;
-        return arr[top+1];
-    }
+void push(int val) {
+   struct Node* newnode = (struct Node*) malloc(sizeof(struct Node));
+   newnode->data = val;
+   newnode->next = top;
+   top = newnode;
+}
+int pop() {
+   if(isEmpty())
+    throw invalid_argument("Stack Underflow");
+   else {
+      top = top->next;
+   }
 }
 
-void display(){
-    if(top>=0){
-        for(int i: arr){
-        cout<<i<<" ";
-    }
-    cout<<endl;
-    }else{
-        cout<<"Stack is empty";
-    }
-    
+
+void display() {
+   struct Node* ptr;
+   if(top==NULL)
+   cout<<"stack is empty";
+   else {
+      ptr = top;
+      while (ptr != NULL) {
+         cout<< ptr->data <<" ";
+         ptr = ptr->next;
+      }
+   }
+   cout<<endl;
 }
 
 int main(){
@@ -66,4 +67,3 @@ int main(){
 	auto duration = duration_cast<microseconds>(stop-start);
 	cout<<"Time : "<<duration.count()<<endl;
 }
-
