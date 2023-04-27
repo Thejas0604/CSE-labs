@@ -17,24 +17,56 @@ void traverseInOrder(struct node *root) {
 }
 
 // Insert a node
-struct node *insertNode(struct node *node, int key) {
-  if(node==NULL){}
-    node = new struct node();
-    node->key = key;
-    node->left = NULL;
-    node->right = NULL;
+struct node* insertNode(struct node* node, int key) {
+    if (node == NULL) {
+        node = new struct node();
+        node->key = key;
+        node->left = NULL;
+        node->right = NULL;
+        return node;
+    }
+    if (key > node->key) {
+        node->right = insertNode(node->right, key);
+    } else if (key <= node->key) {
+        node->left = insertNode(node->left, key);
+    }
     return node;
-  if(key>node->key){
-    node->right = insertNode(node->right,key);
-  }else if(key<=node->key){
-    node->left = insertNode(node->left,key);
-  }
-  return node;
 }
+
 
 // Deleting a node
 struct node *deleteNode(struct node *root, int key) {
-  
+  if(root == NULL){
+    return root;
+  }else if(key<root->key){
+    root->left = deleteNode(root->left,key);
+  }else if(key>root->key){
+    root->right = deleteNode(root->right,key);
+  }else{
+    //no children
+    if(root->left==NULL && root->right == NULL){
+      delete root;
+      root = NULL;
+    }//1 child
+    else if(root->left==NULL){
+      struct node* temp = root->right;
+      delete root;
+      return temp;
+    }else if(root->right==NULL){
+      struct node* temp = root->left;
+      delete root;
+      return temp;
+    }//2 children
+    else{
+      struct node* temp = root->right;
+        while (temp->left != NULL) {
+            temp = temp->left;
+        }
+        root->key = temp->key;
+        root->right = deleteNode(root->right, temp->key);
+    }
+  }
+  return root;
 }
 
 // Driver code
