@@ -45,7 +45,11 @@ struct HashTable{
         hash = hashfunc(user_name);
         empty = is_slot_empty(hash);
 	//add an if condition to complete the code here
-        
+        if(empty==true){
+            password[hash] = user_password;
+        }else{
+            cout<<"Slot is not empty"<<endl;
+        }   
 
     }
     void hash_lookup(string user_name){
@@ -54,7 +58,11 @@ struct HashTable{
         hash = hashfunc(user_name);
         empty = is_slot_empty(hash);
 	//add an if condition to complete the code here
-	
+        if(empty==false){
+            cout<<password[hash]<<endl;
+        }else{
+            cout<<"Not found."<<endl;
+        }
 	
 	
     }
