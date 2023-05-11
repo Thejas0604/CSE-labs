@@ -24,8 +24,6 @@ void heapify(vector<int>&arr, int n, int root)
     // Recursively heapify the affected sub-tree
     heapify(arr, n, largest);
     }
-  
-   
 }
   
 // implementing heap sort

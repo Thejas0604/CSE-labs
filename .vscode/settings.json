@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "*.ino": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "cstdio": "cpp",
+        "iostream": "cpp",
+        "iosfwd": "cpp"
     }
 }
